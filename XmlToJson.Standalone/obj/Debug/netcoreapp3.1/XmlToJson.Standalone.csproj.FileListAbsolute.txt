@@ -1,0 +1,15 @@
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\XmlToJson.Standalone\bin\Debug\netcoreapp3.1\XmlToJson.Standalone.exe
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\XmlToJson.Standalone\obj\Debug\netcoreapp3.1\XmlToJson.Standalone.AssemblyInfoInputs.cache
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\XmlToJson.Standalone\obj\Debug\netcoreapp3.1\XmlToJson.Standalone.AssemblyInfo.cs
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\XmlToJson.Standalone\bin\Debug\netcoreapp3.1\XmlToJson.Standalone.deps.json
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\XmlToJson.Standalone\bin\Debug\netcoreapp3.1\XmlToJson.Standalone.runtimeconfig.json
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\XmlToJson.Standalone\bin\Debug\netcoreapp3.1\XmlToJson.Standalone.runtimeconfig.dev.json
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\XmlToJson.Standalone\bin\Debug\netcoreapp3.1\XmlToJson.Standalone.dll
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\XmlToJson.Standalone\bin\Debug\netcoreapp3.1\XmlToJson.Standalone.pdb
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\XmlToJson.Standalone\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\XmlToJson.Standalone\obj\Debug\netcoreapp3.1\XmlToJson.Standalone.csprojAssemblyReference.cache
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\XmlToJson.Standalone\obj\Debug\netcoreapp3.1\XmlToJson.Standalone.csproj.CoreCompileInputs.cache
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\XmlToJson.Standalone\obj\Debug\netcoreapp3.1\XmlToJson.Standalone.csproj.CopyComplete
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\XmlToJson.Standalone\obj\Debug\netcoreapp3.1\XmlToJson.Standalone.dll
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\XmlToJson.Standalone\obj\Debug\netcoreapp3.1\XmlToJson.Standalone.pdb
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\XmlToJson.Standalone\obj\Debug\netcoreapp3.1\XmlToJson.Standalone.genruntimeconfig.cache

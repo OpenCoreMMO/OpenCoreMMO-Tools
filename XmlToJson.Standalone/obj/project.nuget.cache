@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "MKhUx8fgXcaTkxCassKbpArvHfFZzWudpwvAAfR5Jpr5WMztq2xFZxkTma+joPT/h9cySwRLmMsShXaOks3HbA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Caio\\Documents\\Sources\\XmlToJson.Standalone\\XmlToJson.Standalone\\XmlToJson.Standalone.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Caio\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

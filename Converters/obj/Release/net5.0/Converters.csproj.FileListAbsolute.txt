@@ -1,0 +1,12 @@
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\Converters\bin\Release\net5.0\Converters.deps.json
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\Converters\bin\Release\net5.0\Converters.dll
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\Converters\bin\Release\net5.0\ref\Converters.dll
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\Converters\bin\Release\net5.0\Converters.pdb
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\Converters\obj\Release\net5.0\Converters.csprojAssemblyReference.cache
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\Converters\obj\Release\net5.0\Converters.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\Converters\obj\Release\net5.0\Converters.AssemblyInfoInputs.cache
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\Converters\obj\Release\net5.0\Converters.AssemblyInfo.cs
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\Converters\obj\Release\net5.0\Converters.csproj.CoreCompileInputs.cache
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\Converters\obj\Release\net5.0\Converters.dll
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\Converters\obj\Release\net5.0\ref\Converters.dll
+C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\Converters\obj\Release\net5.0\Converters.pdb

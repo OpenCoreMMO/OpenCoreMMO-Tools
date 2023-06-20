@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "VHaurhtyqq/u4GuJOa7pdT3XXHfPD7lG9d8RPIbcHsavWua+SsBh+5vrv4+flQXoJqRmyOAXDy4uxpexM6BiJA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Caio\\Documents\\Sources\\XmlToJson.Standalone\\OtbmTools\\OtbmTools.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Caio\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

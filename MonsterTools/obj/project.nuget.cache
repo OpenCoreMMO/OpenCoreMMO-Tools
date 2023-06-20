@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "r35YgqI3dq0JRa84ANvfJXgFQJLA1OQgA6CvbgIwM3Ohn8FaP+PAe/yFpBxCW23FhJHOYKhoCUlpfNPonzSp5A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Caio\\Documents\\Sources\\XmlToJson.Standalone\\MonsterTools\\MonsterTools.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Caio\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
