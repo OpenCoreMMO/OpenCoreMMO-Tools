@@ -1,9 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "C:\\Users\\Caio\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\Caio\\.nuget\\packages",
-      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      "C:\\Users\\caiov\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\caiov\\.nuget\\packages"
     ]
   }
 }

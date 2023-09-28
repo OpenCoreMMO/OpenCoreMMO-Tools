@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace XmlToJson.Standalone
+﻿namespace XmlToJson.Standalone
 {
-    class VocationOutput
+    internal class VocationOutput
     {
     }
 }

@@ -1,54 +1,77 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+﻿//using Newtonsoft.Json;
+//using Newtonsoft.Json.Serialization;
+
 using System;
 using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Xml;
-using XmlToJson.Standalone;
+using Converters.Monsters;
+using Newtonsoft.Json;
+using Formatting = Newtonsoft.Json.Formatting;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace MonsterTools
+namespace MonsterTools;
+
+internal static class Program
 {
-    class Program
+    private static void Main(string[] args)
     {
-        static void Main(string[] args)
+        var xmlFiles =
+            Directory.GetFileSystemEntries(Directory.GetCurrentDirectory(), "*xml", SearchOption.AllDirectories);
+
+        var output = "./";
+
+        var i = 0;
+        foreach (var file in xmlFiles)
         {
-            var xmlFiles = Directory.GetFileSystemEntries(Directory.GetCurrentDirectory(), "*xml", SearchOption.AllDirectories);
+            var xml = File.ReadAllText(file);
+            var doc = new XmlDocument();
+            doc.LoadXml(xml);
 
-            var output = "./";
+            if (doc?.FirstChild is null) continue;
 
-            var i = 0;
-            foreach (var file in xmlFiles)
+            var json = JsonConvert.SerializeXmlNode(doc.FirstChild.NextSibling,
+                Formatting.Indented, false);
+
+            json = Regex.Replace(json, "(?<=\")(@)(?!.*\":\\s )", string.Empty, RegexOptions.IgnoreCase);
+
+            if (doc.SelectSingleNode("monster") != null)
             {
+                var outputObject = new JsonToMonster().Convert(json, doc.FirstChild.NextSibling);
 
-                var xml = File.ReadAllText(file);
-                XmlDocument doc = new XmlDocument();
-                doc.LoadXml(xml);
-
-                string json = JsonConvert.SerializeXmlNode(doc.FirstChild.NextSibling, Newtonsoft.Json.Formatting.Indented, false);
-
-                json = Regex.Replace(json, "(?<=\")(@)(?!.*\":\\s )", string.Empty, RegexOptions.IgnoreCase);
-
-                if (doc.SelectSingleNode("monster") != null)
-                {
-                    var outputObject = new JsonToMonster().Convert(json, doc.FirstChild.NextSibling);
-
-                    Save(file.Replace("xml", "json"), output, JsonConvert.SerializeObject(outputObject, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings
+                var jsonSerialized = JsonSerializer.Serialize(outputObject,
+                    new JsonSerializerOptions
                     {
-                        ContractResolver = new CamelCasePropertyNamesContractResolver()
-                    }));
+                        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                        WriteIndented = true,
+                        PropertyNameCaseInsensitive = true,
+                        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+                    });
+
+                jsonSerialized = JsonFormatter.Format(jsonSerialized);
+
+                if (!JsonValidator.IsValid(jsonSerialized))
+                {
+                    Console.WriteLine($"Invalid Json: {file}");
+                    Console.ReadKey();
+                    return;
                 }
 
-                Console.WriteLine($"Converted {++i}/{xmlFiles.Length}");
+                Save(file.Replace("xml", "json"), output, jsonSerialized);
             }
-            Console.WriteLine($"Done!");
 
-            Console.ReadKey();
+            Console.WriteLine($"Converted {++i}/{xmlFiles.Length}");
         }
 
-        private static void Save(string file, string outputPath, string value)
-        {
+        Console.WriteLine("Done!");
 
-            File.WriteAllText(Path.Combine(outputPath, file), value);
-        }
+        Console.ReadKey();
+    }
+
+    private static void Save(string file, string outputPath, string value)
+    {
+        File.WriteAllText(Path.Combine(outputPath, file), value);
     }
 }

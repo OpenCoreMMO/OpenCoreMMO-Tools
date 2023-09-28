@@ -1,17 +1,13 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Xml;
-using XmlToJson.Standalone.Monsters;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
-namespace XmlToJson.Standalone
+namespace XmlToJson.Standalone.Monsters
 {
     public class JsonToMonster
     {
-
         public MonsterOutput Convert(string json, XmlNode xml)
         {
             var monster = new MonsterOutput();
@@ -35,6 +31,10 @@ namespace XmlToJson.Standalone
             {
                 monster.Look.Corpse = look.Value<int>("corpse");
                 monster.Look.Type = look.Value<int>("type");
+                monster.Look.Head = look.Value<int>("head");
+                monster.Look.Body = look.Value<int>("body");
+                monster.Look.Legs = look.Value<int>("legs");
+                monster.Look.Feet = look.Value<int>("feet");
             }
 
             var targetChange = obj.Value<JObject>("targetchange");
@@ -47,12 +47,8 @@ namespace XmlToJson.Standalone
             var flags = obj["flags"]["flag"] as JArray;
 
             foreach (var item in flags.Children<JObject>())
-            {
-                foreach (JProperty prop in item.Properties())
-                {
-                    monster.Flags.TryAdd(prop.Name, prop.Value?.Value<int?>() ?? default);
-                }
-            }
+            foreach (var prop in item.Properties())
+                monster.Flags.TryAdd(prop.Name, prop.Value?.Value<int?>() ?? default);
 
             ConvertAttack(xml, monster);
 
@@ -61,10 +57,7 @@ namespace XmlToJson.Standalone
             var lootNode = xml.SelectNodes("loot/item");
 
 
-            foreach (XmlNode lootItemNode in lootNode)
-            {
-                monster.Loot.Add(ConvertLoot(monster, lootItemNode));
-            }
+            foreach (XmlNode lootItemNode in lootNode) monster.Loot.Add(ConvertLoot(monster, lootItemNode));
 
             ConvertVoices(xml, monster);
             ConvertElements(xml, monster);
@@ -81,15 +74,21 @@ namespace XmlToJson.Standalone
             var summonNode = xml.SelectSingleNode("summons");
 
             if (summonNode is null) return;
-            monster.Summon.MaxSummons = int.TryParse(summonNode.Attributes["maxSummons"].Value, out var maxSummons) ? maxSummons : 1;
+            monster.Summon.MaxSummons = int.TryParse(summonNode.Attributes["maxSummons"].Value, out var maxSummons)
+                ? maxSummons
+                : 1;
 
             foreach (XmlNode summonChild in summonNode.ChildNodes)
             {
                 if (summonChild.Attributes.Count == 0) continue;
 
                 var name = summonChild.Attributes["name"].Value;
-                var interval = int.TryParse(summonChild.Attributes["interval"]?.Value, out var intervalValue) ? intervalValue : 2000;
-                var chance = int.TryParse(summonChild.Attributes["chance"]?.Value, out var chanceValue) ? chanceValue : 0;
+                var interval = int.TryParse(summonChild.Attributes["interval"]?.Value, out var intervalValue)
+                    ? intervalValue
+                    : 2000;
+                var chance = int.TryParse(summonChild.Attributes["chance"]?.Value, out var chanceValue)
+                    ? chanceValue
+                    : 0;
                 var max = int.TryParse(summonChild.Attributes["max"]?.Value, out var maxValue) ? maxValue : 0;
 
                 if (string.IsNullOrWhiteSpace(name)) continue;
@@ -148,17 +147,18 @@ namespace XmlToJson.Standalone
 
             if (voiceNode != null)
             {
-                monster.Voices.Interval = int.TryParse(voiceNode.Attributes["interval"]?.Value, out var interval) ? interval : 5000;
-                monster.Voices.Chance = int.TryParse(voiceNode.Attributes["chance"]?.Value, out var chance) ? chance : 10;
+                monster.Voices.Interval = int.TryParse(voiceNode.Attributes["interval"]?.Value, out var interval)
+                    ? interval
+                    : 5000;
+                monster.Voices.Chance =
+                    int.TryParse(voiceNode.Attributes["chance"]?.Value, out var chance) ? chance : 10;
 
                 foreach (XmlNode voice in voiceNode.ChildNodes)
-                {
                     monster.Voices.Sentences.Add(new MonsterOutput.Voice
                     {
                         Sentence = voice.Attributes["sentence"].Value,
-                        Yell = bool.TryParse(voice.Attributes["yell"]?.Value, out var yell) ? yell : false,
+                        Yell = bool.TryParse(voice.Attributes["yell"]?.Value, out var yell) ? yell : false
                     });
-                }
             }
         }
 
@@ -169,16 +169,12 @@ namespace XmlToJson.Standalone
                 Chance = int.TryParse(lootItemNode.Attributes["chance"]?.Value, out var chance) ? chance : 0,
                 Id = int.TryParse(lootItemNode.Attributes["id"]?.Value, out var id) ? id : 0,
                 Name = lootItemNode.Attributes["name"]?.Value,
-                Countmax = int.TryParse(lootItemNode.Attributes["countmax"]?.Value, out var countMax) ? countMax : 1,
+                Countmax = int.TryParse(lootItemNode.Attributes["countmax"]?.Value, out var countMax) ? countMax : 1
             };
 
             if (lootItemNode.HasChildNodes)
-            {
                 foreach (XmlNode lootChild in lootItemNode.SelectNodes("item"))
-                {
                     loot.Items.Add(ConvertLoot(monster, lootChild));
-                }
-            }
 
             return loot;
         }
@@ -204,22 +200,15 @@ namespace XmlToJson.Standalone
             {
                 var dictionary = new Dictionary<string, object>();
 
-                foreach (XmlAttribute attr in defenseNode.Attributes)
-                {
-                    dictionary.Add(attr.Name, attr.Value);
-                }
+                foreach (XmlAttribute attr in defenseNode.Attributes) dictionary.Add(attr.Name, attr.Value);
 
                 var defenseAttributes = defenseNode.SelectNodes("attribute");
 
                 var attributes = new List<Dictionary<string, object>>();
                 foreach (XmlNode defAttrNode in defenseAttributes)
-                {
-                    attributes.Add(new Dictionary<string, object>() { { defAttrNode.Attributes["key"].Value, defAttrNode.Attributes["value"].Value } });
-                }
-                if (attributes.Any())
-                {
-                    dictionary.Add("attributes", attributes);
-                }
+                    attributes.Add(new Dictionary<string, object>
+                        { { defAttrNode.Attributes["key"].Value, defAttrNode.Attributes["value"].Value } });
+                if (attributes.Any()) dictionary.Add("attributes", attributes);
 
                 defenseList.Add(dictionary);
             }
@@ -231,7 +220,7 @@ namespace XmlToJson.Standalone
         {
             var attackNodes = xml.SelectNodes("attacks/attack");
 
-           // if (attackNodes is null) return;
+            // if (attackNodes is null) return;
 
 
             var attackList = new List<Dictionary<string, object>>();
@@ -240,29 +229,20 @@ namespace XmlToJson.Standalone
             {
                 var dictionary = new Dictionary<string, object>();
 
-                foreach (XmlAttribute attr in attackNode.Attributes)
-                {
-                    dictionary.Add(attr.Name, attr.Value);
-                }
+                foreach (XmlAttribute attr in attackNode.Attributes) dictionary.Add(attr.Name, attr.Value);
 
                 var attackAttributes = attackNode.SelectNodes("attribute");
 
                 var attributes = new List<Dictionary<string, object>>();
                 foreach (XmlNode defAttrNode in attackAttributes)
-                {
-                    attributes.Add(new Dictionary<string, object>() { { defAttrNode.Attributes["key"].Value, defAttrNode.Attributes["value"].Value } });
-                }
-                if (attributes.Any())
-                {
-                    dictionary.Add("attributes", attributes);
-                }
+                    attributes.Add(new Dictionary<string, object>
+                        { { defAttrNode.Attributes["key"].Value, defAttrNode.Attributes["value"].Value } });
+                if (attributes.Any()) dictionary.Add("attributes", attributes);
 
                 attackList.Add(dictionary);
             }
 
             monster.Attacks = attackList;
         }
-
     }
-   
 }

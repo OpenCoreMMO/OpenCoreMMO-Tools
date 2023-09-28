@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Xml;
 
 namespace XmlToJson.Standalone
 {
     internal class SpawnConverter
     {
-        public SpawnConverter()
-        {
-        }
-
         internal IEnumerable<SpawnOutput> Convert(XmlDocument doc)
         {
             var spawnNodes = doc.SelectNodes("spawns/spawn");
@@ -58,6 +53,12 @@ namespace XmlToJson.Standalone
 
     public class SpawnOutput
     {
+        public int Centerx { get; set; }
+        public int Centery { get; set; }
+        public int Centerz { get; set; }
+        public int Radius { get; set; }
+        public List<Monster> Monsters { get; set; } = new List<Monster>();
+
         public class Monster
         {
             public string Name { get; set; }
@@ -66,11 +67,5 @@ namespace XmlToJson.Standalone
             public int Z { get; set; }
             public int Spawntime { get; set; }
         }
-
-        public int Centerx { get; set; }
-        public int Centery { get; set; }
-        public int Centerz { get; set; }
-        public int Radius { get; set; }
-        public List<Monster> Monsters { get; set; } = new List<Monster>();
     }
 }

@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "VHaurhtyqq/u4GuJOa7pdT3XXHfPD7lG9d8RPIbcHsavWua+SsBh+5vrv4+flQXoJqRmyOAXDy4uxpexM6BiJA==",
+  "dgSpecHash": "hGn1DqqCNAYYeErbbKMMQcfQR9C3gCtFUw1eN04Dj6DDgmkg+5YvZ2W6XPNX1yjsdbCu3LfwsxqFa/iPg08dSw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Caio\\Documents\\Sources\\XmlToJson.Standalone\\OtbmTools\\OtbmTools.csproj",
+  "projectFilePath": "C:\\Sources\\OpenCoreMMO-Tools\\monster-converter-tool\\OtbmTools\\OtbmTools.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Caio\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+    "C:\\Users\\caiov\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []
 }

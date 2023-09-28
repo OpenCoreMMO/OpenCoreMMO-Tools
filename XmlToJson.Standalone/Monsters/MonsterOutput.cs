@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace XmlToJson.Standalone.Monsters
 {
@@ -23,8 +21,9 @@ namespace XmlToJson.Standalone.Monsters
         public Dictionary<string, int> Elements { get; set; } = new Dictionary<string, int>();
         public List<LootData> Loot { get; set; } = new List<LootData>();
         public VoicesData Voices { get; set; } = new VoicesData();
-        public Dictionary<string, int> Immunities { get; internal set; } = new Dictionary<string, int>();
+        public Dictionary<string, int> Immunities { get; set; } = new Dictionary<string, int>();
         public SummonData Summon { get; set; } = new SummonData();
+
         public class VoicesData
         {
             public int Interval { get; set; }
@@ -33,43 +32,54 @@ namespace XmlToJson.Standalone.Monsters
 
             public List<Voice> Sentences { get; set; } = new List<Voice>();
         }
+
         public class Voice
         {
             public string Sentence { get; set; }
             public bool Yell { get; internal set; }
         }
+
         public class HealthData
         {
             public int Max { get; set; }
             public int Now { get; set; }
         }
+
         public class LookData
         {
             public int Type { get; set; }
+            public int Head { get; set; }
+            public int Body { get; set; }
+            public int Legs { get; set; }
+            public int Feet { get; set; }
             public int Corpse { get; set; }
         }
+
         public class TargetChangeData
         {
             public int Interval { get; set; }
             public int Chance { get; set; }
         }
+
         public class StrategyData
         {
             public int Attack { get; set; }
             public int Defense { get; set; }
         }
+
         public class DefenseData
         {
             public int Armor { get; set; }
             public int Defense { get; set; }
         }
+
         public class LootData
         {
-                public int Id { get; set; }
+            public int Id { get; set; }
 
-                public int Countmax { get; set; }
+            public int Countmax { get; set; }
 
-                public int Chance { get; set; }
+            public int Chance { get; set; }
 
             public List<LootData> Items { get; set; } = new List<LootData>();
             public string Name { get; internal set; }
@@ -80,6 +90,7 @@ namespace XmlToJson.Standalone.Monsters
             public int MaxSummons { get; set; }
             public List<SummonCreatureData> Summons { get; set; } = new List<SummonCreatureData>();
         }
+
         public class SummonCreatureData
         {
             public string Name { get; set; }

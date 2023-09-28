@@ -1,64 +1,61 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System;
+﻿using System;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Xml;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using XmlToJson.Standalone.Monsters;
+using Formatting = Newtonsoft.Json.Formatting;
 
 namespace XmlToJson.Standalone
 {
-    public class Monster
+    internal class Program
     {
-
-    }
-    class Program
-    {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine("Path:");
             var path = Console.ReadLine();
             var xmlFiles = Directory.GetFileSystemEntries(path, "*.xml", SearchOption.AllDirectories);
-            
+
             var output = "C:/jsonoutput";
 
 
             var i = 0;
             foreach (var file in xmlFiles)
             {
-                
                 var xml = File.ReadAllText(file);
-                XmlDocument doc = new XmlDocument();
+                var doc = new XmlDocument();
                 doc.LoadXml(xml);
 
-              
 
-                string json = JsonConvert.SerializeXmlNode(doc.FirstChild.NextSibling, Newtonsoft.Json.Formatting.Indented, false);
+                var json = JsonConvert.SerializeXmlNode(doc.FirstChild.NextSibling, Formatting.Indented, false);
 
                 json = Regex.Replace(json, "(?<=\")(@)(?!.*\":\\s )", string.Empty, RegexOptions.IgnoreCase);
 
                 if (doc.SelectSingleNode("spawns") != null)
                 {
                     var spawns = new SpawnConverter().Convert(doc);
-                    Save(path, file, output, JsonConvert.SerializeObject(spawns, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings
-                    {
-                        ContractResolver = new CamelCasePropertyNamesContractResolver()
-                    }));
+                    Save(path, file, output, JsonConvert.SerializeObject(spawns, Formatting.Indented,
+                        new JsonSerializerSettings
+                        {
+                            ContractResolver = new CamelCasePropertyNamesContractResolver()
+                        }));
                 }
                 else if (doc.SelectSingleNode("monster") != null)
                 {
                     var outputObject = new JsonToMonster().Convert(json, doc.FirstChild.NextSibling);
 
 
-                    Save(path, file, output, JsonConvert.SerializeObject(outputObject, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings
-                    {
-                        ContractResolver = new CamelCasePropertyNamesContractResolver()
-                    }));
+                    Save(path, file, output, JsonConvert.SerializeObject(outputObject, Formatting.Indented,
+                        new JsonSerializerSettings
+                        {
+                            ContractResolver = new CamelCasePropertyNamesContractResolver()
+                        }));
                 }
 
-             
+
                 Console.WriteLine($"{++i}/{xmlFiles.Length}");
             }
-
         }
 
         private static void Save(string rootPath, string path, string outputPath, string value)

@@ -10,3 +10,15 @@ C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\Converters\bin\Debug\net5.0
 C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\Converters\obj\Debug\net5.0\Converters.dll
 C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\Converters\obj\Debug\net5.0\ref\Converters.dll
 C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\Converters\obj\Debug\net5.0\Converters.pdb
+C:\Sources\OpenCoreMMO-Tools\monster-converter-tool\Converters\bin\Debug\net5.0\Converters.deps.json
+C:\Sources\OpenCoreMMO-Tools\monster-converter-tool\Converters\bin\Debug\net5.0\Converters.dll
+C:\Sources\OpenCoreMMO-Tools\monster-converter-tool\Converters\bin\Debug\net5.0\Converters.pdb
+C:\Sources\OpenCoreMMO-Tools\monster-converter-tool\Converters\obj\Debug\net5.0\Converters.csproj.AssemblyReference.cache
+C:\Sources\OpenCoreMMO-Tools\monster-converter-tool\Converters\obj\Debug\net5.0\Converters.GeneratedMSBuildEditorConfig.editorconfig
+C:\Sources\OpenCoreMMO-Tools\monster-converter-tool\Converters\obj\Debug\net5.0\Converters.AssemblyInfoInputs.cache
+C:\Sources\OpenCoreMMO-Tools\monster-converter-tool\Converters\obj\Debug\net5.0\Converters.AssemblyInfo.cs
+C:\Sources\OpenCoreMMO-Tools\monster-converter-tool\Converters\obj\Debug\net5.0\Converters.csproj.CoreCompileInputs.cache
+C:\Sources\OpenCoreMMO-Tools\monster-converter-tool\Converters\obj\Debug\net5.0\Converters.dll
+C:\Sources\OpenCoreMMO-Tools\monster-converter-tool\Converters\obj\Debug\net5.0\refint\Converters.dll
+C:\Sources\OpenCoreMMO-Tools\monster-converter-tool\Converters\obj\Debug\net5.0\Converters.pdb
+C:\Sources\OpenCoreMMO-Tools\monster-converter-tool\Converters\obj\Debug\net5.0\ref\Converters.dll

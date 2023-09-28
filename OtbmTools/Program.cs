@@ -1,53 +1,54 @@
-﻿using Converters;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System;
+﻿using System;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Xml;
+using Converters;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Formatting = Newtonsoft.Json.Formatting;
 
-namespace OtbmTools
+namespace OtbmTools;
+
+internal class Program
 {
-    class Program
+    private static void Main(string[] args)
     {
-        static void Main(string[] args)
+        var xmlFiles = Directory.GetFileSystemEntries(Directory.GetCurrentDirectory(), "*-spawn.xml",
+            SearchOption.AllDirectories);
+
+        var output = "./";
+
+        var i = 0;
+        foreach (var file in xmlFiles)
         {
-            var xmlFiles = Directory.GetFileSystemEntries(Directory.GetCurrentDirectory(), "*-spawn.xml", SearchOption.AllDirectories);
+            var xml = File.ReadAllText(file);
+            var doc = new XmlDocument();
+            doc.LoadXml(xml);
 
-            var output = "./";
+            var json = JsonConvert.SerializeXmlNode(doc.FirstChild.NextSibling, Formatting.Indented, false);
 
-            var i = 0;
-            foreach (var file in xmlFiles)
+            json = Regex.Replace(json, "(?<=\")(@)(?!.*\":\\s )", string.Empty, RegexOptions.IgnoreCase);
+
+            if (doc.SelectSingleNode("spawns") != null)
             {
-
-                var xml = File.ReadAllText(file);
-                XmlDocument doc = new XmlDocument();
-                doc.LoadXml(xml);
-
-                string json = JsonConvert.SerializeXmlNode(doc.FirstChild.NextSibling, Newtonsoft.Json.Formatting.Indented, false);
-
-                json = Regex.Replace(json, "(?<=\")(@)(?!.*\":\\s )", string.Empty, RegexOptions.IgnoreCase);
-
-                if (doc.SelectSingleNode("spawns") != null)
-                {
-                    var spawns = new SpawnConverter().Convert(doc);
-                    Save(file.Replace("xml","json"), output, JsonConvert.SerializeObject(spawns, Newtonsoft.Json.Formatting.Indented, new JsonSerializerSettings
+                var spawns = new SpawnConverter().Convert(doc);
+                Save(file.Replace("xml", "json"), output, JsonConvert.SerializeObject(spawns, Formatting.Indented,
+                    new JsonSerializerSettings
                     {
                         ContractResolver = new CamelCasePropertyNamesContractResolver()
                     }));
-                }
-            
-                Console.WriteLine($"Converted {++i}/{xmlFiles.Length}");
             }
-            Console.WriteLine($"Done!");
 
-            Console.ReadKey();
+            Console.WriteLine($"Converted {++i}/{xmlFiles.Length}");
         }
 
-        private static void Save(string file, string outputPath, string value)
-        {
+        Console.WriteLine("Done!");
 
-            File.WriteAllText(Path.Combine(outputPath, file), value);
-        }
+        Console.ReadKey();
+    }
+
+    private static void Save(string file, string outputPath, string value)
+    {
+        File.WriteAllText(Path.Combine(outputPath, file), value);
     }
 }

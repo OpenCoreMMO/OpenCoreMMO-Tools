@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Caio\\Documents\\Sources\\XmlToJson.Standalone\\XmlToJson.Standalone\\XmlToJson.Standalone.csproj": {}
+    "C:\\Sources\\OpenCoreMMO-Tools\\monster-converter-tool\\XmlToJson.Standalone\\XmlToJson.Standalone.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Caio\\Documents\\Sources\\XmlToJson.Standalone\\XmlToJson.Standalone\\XmlToJson.Standalone.csproj": {
+    "C:\\Sources\\OpenCoreMMO-Tools\\monster-converter-tool\\XmlToJson.Standalone\\XmlToJson.Standalone.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Caio\\Documents\\Sources\\XmlToJson.Standalone\\XmlToJson.Standalone\\XmlToJson.Standalone.csproj",
+        "projectUniqueName": "C:\\Sources\\OpenCoreMMO-Tools\\monster-converter-tool\\XmlToJson.Standalone\\XmlToJson.Standalone.csproj",
         "projectName": "XmlToJson.Standalone",
-        "projectPath": "C:\\Users\\Caio\\Documents\\Sources\\XmlToJson.Standalone\\XmlToJson.Standalone\\XmlToJson.Standalone.csproj",
-        "packagesPath": "C:\\Users\\Caio\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Caio\\Documents\\Sources\\XmlToJson.Standalone\\XmlToJson.Standalone\\obj\\",
+        "projectPath": "C:\\Sources\\OpenCoreMMO-Tools\\monster-converter-tool\\XmlToJson.Standalone\\XmlToJson.Standalone.csproj",
+        "packagesPath": "C:\\Users\\caiov\\.nuget\\packages\\",
+        "outputPath": "C:\\Sources\\OpenCoreMMO-Tools\\monster-converter-tool\\XmlToJson.Standalone\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Caio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\caiov\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -25,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "Z:\\nugget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -46,7 +42,7 @@
           "dependencies": {
             "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[12.0.3, )"
+              "version": "[13.0.3, )"
             }
           },
           "imports": [
@@ -55,7 +51,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -64,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
