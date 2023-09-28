@@ -2,7 +2,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 
-namespace MonsterTools;
+namespace MonsterTools.Json;
 
 public static class JsonFormatter
 {
