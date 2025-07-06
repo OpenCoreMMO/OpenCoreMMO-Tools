@@ -2,9 +2,11 @@
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Xml;
+using Converters;
+using Converters.Monsters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using XmlToJson.Standalone.Monsters;
+
 using Formatting = Newtonsoft.Json.Formatting;
 
 namespace XmlToJson.Standalone

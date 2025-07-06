@@ -1,3 +1,0 @@
-C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\OtbmTools\bin\Release\net5.0\publish\OtbmTools.pdb
-C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\OtbmTools\bin\Release\net5.0\publish\Converters.pdb
-C:\Users\Caio\Documents\Sources\XmlToJson.Standalone\OtbmTools\bin\Release\net5.0\publish\OtbmTools.exe

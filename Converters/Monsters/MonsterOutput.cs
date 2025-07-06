@@ -1,132 +1,189 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace Converters.Monsters;
 
 public class MonsterOutput
 {
-    public string Name { get; set; }
-    public string Description { get; set; }
-    public string Race { get; set; }
-    public int Experience { get; set; }
-    public int Speed { get; set; }
-    public int Health { get; set; }
-    public int MaxHealth { get; set; }
-    public int ManaCost { get; set; }
-    public int Corpse { get; set; }
-    public LookData Outfit { get; set; } = new();
-    public TargetChangeData TargetChange { get; set; }
-    public StrategyData Strategy { get; set; }
-    public Dictionary<string, int> Flags { get; set; } = new();
-    public List<Attack> Attacks { get; set; }
-    public DefenseData Defense { get; set; } = new();
-    public List<Dictionary<string, object>> Defenses { get; set; }
-    public Dictionary<string, int> Elements { get; set; }
-    public List<LootData> Loot { get; set; }
-    public VoicesData Voices { get; set; }
-    public Dictionary<string, int> Immunities { get; internal set; }
-    public SummonData Summon { get; set; }
+    [JsonPropertyName("name")] public string Name { get; set; }
 
-    public class VoicesData
-    {
-        public int Interval { get; set; }
+    [JsonPropertyName("nameDescription")] public string NameDescription { get; set; }
 
-        public int Chance { get; set; }
+    [JsonPropertyName("race")] public string Race { get; set; }
 
-        public List<Voice> Sentences { get; set; } = new();
-    }
+    [JsonPropertyName("experience")] public uint Experience { get; set; }
 
-    public class Voice
-    {
-        public string Sentence { get; set; }
-        public bool Yell { get; internal set; }
-    }
+    [JsonPropertyName("speed")] public ushort Speed { get; set; }
+
+    [JsonPropertyName("manacost")] public ushort ManaCost { get; set; }
+
+    [JsonPropertyName("health")] public HealthData Health { get; set; } = new HealthData();
+
+    [JsonPropertyName("look")] public LookData Look { get; set; } = new LookData();
+
+    [JsonPropertyName("targetchange")] public TargetchangeData TargetChange { get; set; } = new TargetchangeData();
+
+    [JsonPropertyName("strategy")] public StrategyData Strategy { get; set; } = new StrategyData();
+
+    [JsonPropertyName("flags")] public IDictionary<string, ushort> Flags { get; set; } = new Dictionary<string, ushort>();
+
+    [JsonPropertyName("attacks")] public List<Dictionary<string, object>> Attacks { get; set; } = new();
+
+    [JsonPropertyName("defenses")] public List<Dictionary<string, object>> Defenses { get; set; } = new();
+
+    [JsonPropertyName("defense")] public DefenseData Defense { get; set; } = new DefenseData();
+
+    [JsonPropertyName("elements")] public Dictionary<string, sbyte> Elements { get; set; } = new Dictionary<string, sbyte>();
+
+    [JsonPropertyName("immunities")] public Dictionary<string, byte> Immunities { get; set; } = new Dictionary<string, byte>();
+
+    [JsonPropertyName("voices")] public VoicesData Voices { get; set; } = new VoicesData();
+
+    [JsonPropertyName("summon")] public SummonData Summon { get; set; } = new SummonData();
+
+    [JsonPropertyName("loot")] public List<LootData> Loot { get; set; } = new List<LootData>();
 
     public class HealthData
     {
-        public int Max { get; set; }
-        public int Now { get; set; }
+        [JsonPropertyName("now")] public uint Now { get; set; }
+
+        [JsonPropertyName("max")] public uint Max { get; set; }
     }
 
     public class LookData
     {
-        public int Type { get; set; }
-        public int Head { get; set; }
-        public int Body { get; set; }
-        public int Legs { get; set; }
-        public int Feet { get; set; }
+        [JsonPropertyName("type")] public ushort Type { get; set; }
+
+        [JsonPropertyName("corpse")] public ushort Corpse { get; set; }
+
+        [JsonPropertyName("body")] public ushort Body { get; set; }
+
+        [JsonPropertyName("legs")] public ushort Legs { get; set; }
+
+        [JsonPropertyName("feet")] public ushort Feet { get; set; }
+
+        [JsonPropertyName("head")] public ushort Head { get; set; }
+
+        [JsonPropertyName("addons")] public ushort Addons { get; set; }
     }
 
-    public class TargetChangeData
+    public class TargetchangeData
     {
-        public int Interval { get; set; }
-        public int Chance { get; set; }
+        [JsonPropertyName("interval")]
+        [JsonConverter(typeof(NumberToStringConverter))]
+        public string Interval { get; set; }
+
+        [JsonPropertyName("chance")]
+        [JsonConverter(typeof(NumberToStringConverter))]
+        public string Chance { get; set; }
     }
 
     public class StrategyData
     {
-        public int Attack { get; set; }
-        public int Defense { get; set; }
+        [JsonPropertyName("attack")]
+        [JsonConverter(typeof(NumberToStringConverter))]
+        public string Attack { get; set; }
+
+        [JsonPropertyName("defense")]
+        [JsonConverter(typeof(NumberToStringConverter))]
+        public string Defense { get; set; }
     }
 
     public class DefenseData
     {
-        public int Armor { get; set; }
-        public int Defense { get; set; }
+        [JsonPropertyName("armor")]
+        [JsonConverter(typeof(NumberToStringConverter))]
+        public string Armor { get; set; }
+
+        [JsonPropertyName("defense")]
+        [JsonConverter(typeof(NumberToStringConverter))]
+        public string Defense { get; set; }
+    }
+
+    public class Voice
+    {
+        [JsonPropertyName("sentence")] public string Sentence { get; set; }
+
+        [JsonPropertyName("yell")] public bool Yell { get; set; }
+    }
+
+    public class VoicesData
+    {
+        [JsonPropertyName("interval")]
+        [JsonConverter(typeof(NumberToStringConverter))]
+        public string Interval { get; set; }
+
+        [JsonPropertyName("chance")]
+        [JsonConverter(typeof(NumberToStringConverter))]
+        public string Chance { get; set; }
+
+        [JsonPropertyName("sentences")] public List<Voice> Sentences { get; set; } = new List<Voice>();
+    }
+
+    public class ItemData
+    {
+        [JsonPropertyName("id")] public string Id { get; set; }
+
+        [JsonPropertyName("countmax")] public string Countmax { get; set; }
+
+        [JsonPropertyName("chance")] public string Chance { get; set; }
+
+        [JsonPropertyName("item")] public List<ItemData> Item { get; set; } = new List<ItemData>();
     }
 
     public class LootData
     {
-        public string Name { get; internal set; }
-        public int? Id { get; set; }
-        public int Countmax { get; set; }
-        public int Chance { get; set; }
-        public List<LootData> Items { get; set; }
+        [JsonPropertyName("id")]
+        [JsonConverter(typeof(NumberToStringConverter))]
+        public string Id { get; set; }
+
+        [JsonPropertyName("countmax")]
+        [JsonConverter(typeof(NumberToStringConverter))]
+        public string CountMax { get; set; }
+
+        [JsonPropertyName("chance")]
+        [JsonConverter(typeof(NumberToStringConverter))]
+        public string Chance { get; set; }
+
+        [JsonPropertyName("items")] public List<LootData> Items { get; set; } = new List<LootData>();
     }
 
     public class SummonData
     {
-        public int MaxSummons { get; set; }
-        public List<SummonCreatureData> Summons { get; set; } = new();
+        [JsonPropertyName("maxSummons")] public int MaxSummons { get; set; }
+
+        [JsonPropertyName("summons")] public List<MonsterSummonData> Summons { get; set; } = new List<MonsterSummonData>();
     }
 
-    public class SummonCreatureData
+    public class MonsterSummonData
     {
-        public string Name { get; set; }
-        public int Interval { get; set; }
-        public int Chance { get; set; }
-        public int Max { get; set; }
+        [JsonPropertyName("name")] public string Name { get; set; }
+
+        [JsonPropertyName("interval")] public uint Interval { get; set; }
+
+        [JsonPropertyName("chance")] public int Chance { get; set; }
+
+        [JsonPropertyName("max")] public int Max { get; set; }
     }
 
-    public class Attack
+    public class NumberToStringConverter : JsonConverter<string>
     {
-        public string Name { get; set; }
-
-        public int? Interval { get; set; }
-        public int? Chance { get; set; }
-
-        public int? MinDamage { get; set; }
-        public int? MaxDamage { get; set; }
-        public string DamageType { get; set; }
-
-        public int? Range { get; set; }
-        public int? Radius { get; set; }
-
-        public string ShootEffect { get; set; }
-        public string Effect { get; set; }
-
-        public int? Length { get; set; }
-        public int? Spread { get; set; }
-        public bool? NeedTarget { get; set; }
-
-        public AttackCondition Condition { get; set; }
-        public Dictionary<string, object> Extra { get; set; }
-
-        public class AttackCondition
+        public override string Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            public string Type { get; set; }
-            public int Interval { get; set; }
-            public int? TotalDamage { get; set; }
-            public int? StartDamage { get; set; }
+            if (reader.TokenType == JsonTokenType.Number) return reader.GetInt32().ToString();
+            if (reader.TokenType == JsonTokenType.String)
+                return reader.GetString() ?? throw new JsonException("String value is null.");
+            throw new JsonException("Invalid JSON format for a string representation of a number.");
+        }
+
+        public override void Write(Utf8JsonWriter writer, string value, JsonSerializerOptions options)
+        {
+            if (int.TryParse(value, out var number))
+                writer.WriteNumberValue(number);
+            else
+                writer.WriteStringValue(value);
         }
     }
 }
