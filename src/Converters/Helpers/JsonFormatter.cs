@@ -2,16 +2,24 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 
-namespace Converters.Json;
+namespace Converters.Helpers;
 
 public static class JsonFormatter
 {
+    public static string UnescapeUnicode(this string json)
+    {
+        // Substitui códigos Unicode por seus caracteres reais
+        return json
+            .Replace("\\u0027", "'"); // '
+    }
+
     public static string Format(string json, bool breakLine = true)
     {
         var jsonDocument = JsonDocument.Parse(json);
         var sb = new StringBuilder();
 
-        return IndentJson(jsonDocument.RootElement, sb, breakLine);
+        var formatted = IndentJson(jsonDocument.RootElement, sb, breakLine);
+        return formatted.UnescapeUnicode();
     }
 
     private static string IndentJson(JsonElement element, StringBuilder sb, bool breakLine, int level = 0)

@@ -4,7 +4,7 @@ using System.Xml;
 
 namespace Converters.Vocations;
 
-public class JsonToVocation
+public class VocationFromJson
 {
     public List<VocationOutput> Convert(XmlDocument doc)
     {

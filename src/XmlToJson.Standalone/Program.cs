@@ -1,76 +1,18 @@
-﻿using System;
-using System.IO;
-using System.Text.RegularExpressions;
-using System.Xml;
-using Converters;
-using Converters.Monsters;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+﻿using Converters;
 
-using Formatting = Newtonsoft.Json.Formatting;
+Console.WriteLine("TFS Path:");
+var tfsPath = Console.ReadLine();
 
-namespace XmlToJson.Standalone
-{
-    internal class Program
-    {
-        private static void Main(string[] args)
-        {
-            Console.WriteLine("Path:");
-            var path = Console.ReadLine();
-            var xmlFiles = Directory.GetFileSystemEntries(path, "*.xml", SearchOption.AllDirectories);
+var tfsDataPath = Path.Join(tfsPath, "data");
 
-            var output = "C:/jsonoutput";
+var tfsItemsPath = Path.Join(tfsDataPath, "items");
+ItemConverter.Convert(tfsItemsPath);
 
+var tfsMonsterPath = Path.Join(tfsDataPath, "monster");
+MonsterConverter.Convert(tfsMonsterPath);
 
-            var i = 0;
-            foreach (var file in xmlFiles)
-            {
-                var xml = File.ReadAllText(file);
-                var doc = new XmlDocument();
-                doc.LoadXml(xml);
+var tfsWorldPath = Path.Join(tfsDataPath, "world");
+SpawnConverter.Convert(tfsWorldPath);
 
-
-                var json = JsonConvert.SerializeXmlNode(doc.FirstChild.NextSibling, Formatting.Indented, false);
-
-                json = Regex.Replace(json, "(?<=\")(@)(?!.*\":\\s )", string.Empty, RegexOptions.IgnoreCase);
-
-                if (doc.SelectSingleNode("spawns") != null)
-                {
-                    var spawns = new SpawnConverter().Convert(doc);
-                    Save(path, file, output, JsonConvert.SerializeObject(spawns, Formatting.Indented,
-                        new JsonSerializerSettings
-                        {
-                            ContractResolver = new CamelCasePropertyNamesContractResolver()
-                        }));
-                }
-                else if (doc.SelectSingleNode("monster") != null)
-                {
-                    var outputObject = new JsonToMonster().Convert(json, doc.FirstChild.NextSibling);
-
-
-                    Save(path, file, output, JsonConvert.SerializeObject(outputObject, Formatting.Indented,
-                        new JsonSerializerSettings
-                        {
-                            ContractResolver = new CamelCasePropertyNamesContractResolver()
-                        }));
-                }
-
-
-                Console.WriteLine($"{++i}/{xmlFiles.Length}");
-            }
-
-            Console.WriteLine($"Files saved in: {output}");
-        }
-
-        private static void Save(string rootPath, string path, string outputPath, string value)
-        {
-            path = path.Replace(rootPath, "");
-            path = path.Replace("xml", "json");
-
-            var resultPath = Path.Join(outputPath, path);
-
-            Directory.CreateDirectory(Directory.GetParent(resultPath).FullName);
-            File.WriteAllText(Path.Join(outputPath, path), value);
-        }
-    }
-}
+var tfsVocationPath = Path.Join(tfsDataPath, "XML");
+VocationConverter.Convert(tfsVocationPath);

@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace Converters.Json;
+namespace Converters.Helpers;
 
 public static class JsonValidator
 {

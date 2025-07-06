@@ -7,7 +7,7 @@ using Newtonsoft.Json.Linq;
 namespace Converters.Monsters;
 
 
-public class JsonToMonster
+public class MonsterFromJson
 {
     public MonsterOutput Convert(string json, XmlNode xml)
     {

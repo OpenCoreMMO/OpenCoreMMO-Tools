@@ -1,5 +1,4 @@
-﻿using Converters.JsonConverters;
-using NeoServer.Loaders.Converts;
+﻿using Converters.Helpers.JsonConverters;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
