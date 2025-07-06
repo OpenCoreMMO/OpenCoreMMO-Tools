@@ -3,7 +3,7 @@ OpenCoreMMO Converter Tools
 
 This repository has some tools for items, monsters, vocations, spawns and houses conversions from xml to json
 
-Execute XmlToJson.Standalon
+Execute XmlToJson.Standalone
 ![image](https://github.com/user-attachments/assets/def9e421-31de-4af2-b3a2-c12a96441a66)
 
 Insert a tfs path and click enter
