@@ -1,20 +1,23 @@
 ﻿using System;
 using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Xml;
-using Converters;
+using Converters.Json;
+using Converters.Monsters;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using Formatting = Newtonsoft.Json.Formatting;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace OtbmTools;
+namespace MonsterTools;
 
-internal class Program
+internal static class Program
 {
     private static void Main(string[] args)
     {
-        var xmlFiles = Directory.GetFileSystemEntries(Directory.GetCurrentDirectory(), "*-spawn.xml",
-            SearchOption.AllDirectories);
+        var xmlFiles =
+            Directory.GetFileSystemEntries(Directory.GetCurrentDirectory(), "*xml", SearchOption.AllDirectories);
 
         var output = "./";
 
@@ -25,18 +28,36 @@ internal class Program
             var doc = new XmlDocument();
             doc.LoadXml(xml);
 
-            var json = JsonConvert.SerializeXmlNode(doc.FirstChild.NextSibling, Formatting.Indented, false);
+            if (doc?.FirstChild is null) continue;
+
+            var json = JsonConvert.SerializeXmlNode(doc.FirstChild.NextSibling,
+                Formatting.Indented, false);
 
             json = Regex.Replace(json, "(?<=\")(@)(?!.*\":\\s )", string.Empty, RegexOptions.IgnoreCase);
 
-            if (doc.SelectSingleNode("spawns") != null)
+            if (doc.SelectSingleNode("monster") != null)
             {
-                var spawns = new SpawnConverter().Convert(doc);
-                Save(file.Replace("xml", "json"), output, JsonConvert.SerializeObject(spawns, Formatting.Indented,
-                    new JsonSerializerSettings
+                var outputObject = new JsonToMonster().Convert(json, doc.FirstChild.NextSibling);
+
+                var jsonSerialized = JsonSerializer.Serialize(outputObject,
+                    new JsonSerializerOptions
                     {
-                        ContractResolver = new CamelCasePropertyNamesContractResolver()
-                    }));
+                        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                        WriteIndented = true,
+                        PropertyNameCaseInsensitive = true,
+                        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+                    });
+
+                jsonSerialized = JsonFormatter.Format(jsonSerialized);
+
+                if (!JsonValidator.IsValid(jsonSerialized))
+                {
+                    Console.WriteLine($"Invalid Json: {file}");
+                    Console.ReadKey();
+                    return;
+                }
+
+                Save(file.Replace("xml", "json"), output, jsonSerialized);
             }
 
             Console.WriteLine($"Converted {++i}/{xmlFiles.Length}");

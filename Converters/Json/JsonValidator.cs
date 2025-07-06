@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace MonsterTools.Json;
+namespace Converters.Json;
 
 public static class JsonValidator
 {

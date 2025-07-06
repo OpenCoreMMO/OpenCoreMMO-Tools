@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30320.27
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlToJson.Standalone", "XmlToJson.Standalone\XmlToJson.Standalone.csproj", "{F74B58FC-1520-4C63-AB80-3EE84EDBA627}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Converters", "Converters\Converters.csproj", "{A51B948E-7BBD-4384-A0CE-42AFBC8BCF68}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonsterTools", "MonsterTools\MonsterTools.csproj", "{3DCBA47C-A73A-407A-AEA6-1B245C7A8B49}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VocationTools", "src\VocationTools\VocationTools.csproj", "{4AB3EA59-518A-4BA6-8C7F-2B301B48CE9C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{3DCBA47C-A73A-407A-AEA6-1B245C7A8B49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DCBA47C-A73A-407A-AEA6-1B245C7A8B49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DCBA47C-A73A-407A-AEA6-1B245C7A8B49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AB3EA59-518A-4BA6-8C7F-2B301B48CE9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AB3EA59-518A-4BA6-8C7F-2B301B48CE9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AB3EA59-518A-4BA6-8C7F-2B301B48CE9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AB3EA59-518A-4BA6-8C7F-2B301B48CE9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

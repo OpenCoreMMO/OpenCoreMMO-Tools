@@ -58,6 +58,8 @@ namespace XmlToJson.Standalone
 
                 Console.WriteLine($"{++i}/{xmlFiles.Length}");
             }
+
+            Console.WriteLine($"Files saved in: {output}");
         }
 
         private static void Save(string rootPath, string path, string outputPath, string value)
