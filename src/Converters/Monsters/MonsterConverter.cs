@@ -1,25 +1,23 @@
 ﻿using System;
-using System.IO;
-using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Text.RegularExpressions;
+using System.Text.Json;
 using System.Xml;
-using Converters.Json;
+using System.IO;
+using JsonSerializer = System.Text.Json.JsonSerializer;
+using Converters.Helpers;
 using Converters.Monsters;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 using Formatting = Newtonsoft.Json.Formatting;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace MonsterTools;
+namespace Converters;
 
-internal static class Program
+public static class MonsterConverter
 {
-    private static void Main(string[] args)
+    public static void Convert(string path)
     {
         var xmlFiles =
-            Directory.GetFileSystemEntries(Directory.GetCurrentDirectory(), "*xml", SearchOption.AllDirectories);
-
-        var output = "./";
+            Directory.GetFileSystemEntries(path, "*xml", SearchOption.AllDirectories);
 
         var i = 0;
         foreach (var file in xmlFiles)
@@ -37,7 +35,8 @@ internal static class Program
 
             if (doc.SelectSingleNode("monster") != null)
             {
-                var outputObject = new JsonToMonster().Convert(json, doc.FirstChild.NextSibling);
+                var outputObject = new MonsterFromJson().Convert(json, doc.FirstChild.NextSibling);
+                var outputPath = Path.Combine(file.Replace(".xml", ".json"));
 
                 var jsonSerialized = JsonSerializer.Serialize(outputObject,
                     new JsonSerializerOptions
@@ -52,24 +51,17 @@ internal static class Program
 
                 if (!JsonValidator.IsValid(jsonSerialized))
                 {
-                    Console.WriteLine($"Invalid Json: {file}");
+                    Console.WriteLine("Error: Invalid JSON.");
                     Console.ReadKey();
                     return;
                 }
 
-                Save(file.Replace("xml", "json"), output, jsonSerialized);
+                File.WriteAllText(outputPath, jsonSerialized);
             }
 
-            Console.WriteLine($"Converted {++i}/{xmlFiles.Length}");
+            Console.WriteLine($"Converted monster {++i}/{xmlFiles.Length}");
         }
 
-        Console.WriteLine("Done!");
-
-        Console.ReadKey();
-    }
-
-    private static void Save(string file, string outputPath, string value)
-    {
-        File.WriteAllText(Path.Combine(outputPath, file), value);
+        Console.WriteLine("Monsters conversion completed successfully!");
     }
 }

@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace NeoServer.Loaders.Converts;
+namespace Converters.Helpers.JsonConverters;
 
 public class ByteConverter : JsonConverter<byte>
 {

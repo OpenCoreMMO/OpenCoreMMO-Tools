@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Converters.JsonConverters;
+namespace Converters.Helpers.JsonConverters;
 
 public class SkillConverter : JsonConverter<Dictionary<SkillType, float>>
 {
