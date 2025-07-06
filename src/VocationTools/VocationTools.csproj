@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Converters\Converters.csproj" />
+    <ProjectReference Include="..\Converters\Converters.csproj" />
   </ItemGroup>
 
 </Project>
